@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compress Image to Exact Size (KB) — Free, No Upload</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<meta name="description" content="Shrink JPG, PNG and WebP images to an exact file size such as 100 KB or 200 KB. Everything runs in your browser, so your photos never leave your device.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compress Image to Exact Size (KB) — Free, No Upload">
+<meta property="og:description" content="Shrink JPG, PNG and WebP images to an exact file size. Runs entirely in your browser, no upload.">
+<meta name="twitter:card" content="summary">
+  <!-- Tailwind CSS -->
+  <link rel="stylesheet" href="css/tailwind.css" />
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="css/vendor/fontawesome.css" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-[#F1F5F9] text-slate-800 font-sans antialiased selection:bg-sky-500/20 selection:text-sky-900 min-h-screen flex flex-col">
+
+  <!-- ==================== 1. RECOMPRESSOR TOP NAVIGATION BAR ==================== -->
+  <header class="bg-[#131A24] border-b border-slate-800 text-slate-200 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center text-white shadow-sm shadow-sky-500/30 group-hover:scale-105 transition-transform">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 14l4-4 4 4 5-6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="15" cy="14" r="2.2" fill="#10b981" stroke="none"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold tracking-wider text-white text-sm sm:text-base uppercase">PIXEL PRESS</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Navigation Links & Language Selector -->
+      <div class="flex items-center gap-4 sm:gap-6">
+        <div class="flex items-center gap-2">
+          <span class="hidden lg:inline-flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2.5 py-1 rounded-full font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span data-i18n="privacyPill">100% Local Browser Engine</span>
+          </span>
+
+          <!-- Multilingual Switcher -->
+          <div class="relative">
+            <select id="langSelect" onchange="setLanguage(this.value)" aria-label="Language Selector" data-i18n-aria-label="languageSelector"
+              class="bg-slate-800/90 hover:bg-slate-800 text-slate-200 text-xs font-medium rounded-lg px-2.5 py-1.5 border border-slate-700 focus:outline-none focus:border-sky-500 cursor-pointer">
+              <option value="en">🌐 English</option>
+              <option value="zh">🌐 简体中文</option>
+              <option value="ja">🌐 日本語</option>
+              <option value="es">🌐 Español</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 2. RECOMPRESSOR HERO & DROPZONE SECTION ==================== -->
+  <section class="bg-gradient-to-b from-[#1C2532] to-[#253142] text-white border-b border-slate-700/80 py-7 sm:py-9 px-4 sm:px-6 shadow-inner">
+    <div class="max-w-5xl mx-auto text-center space-y-5">
+
+      <!-- Headline & Value Proposition -->
+      <div class="space-y-4 max-w-3xl mx-auto">
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white" data-i18n="heroTitle">
+          Smarter Image Compression
+        </h1>
+        <p class="hero-subtitle text-xs sm:text-sm text-slate-300 leading-loose" data-i18n-html="heroSubtitle">
+          Pick the perfect trade-off between file size and quality on an interactive RMSE curve, or lock in an exact KB limit.<br><strong>Your images are never uploaded to a server. Completely free to use.</strong>
+        </p>
+      </div>
+
+      <!-- Signature Recompressor Dashed Dropzone -->
+      <div id="heroDropzone"
+        class="max-w-3xl mx-auto rounded-2xl border-2 border-dashed border-sky-400/50 hover:border-sky-400 bg-[#151D28]/70 hover:bg-[#151D28]/95 transition-all p-5 sm:p-7 shadow-xl">
+
+        <div class="flex flex-col items-center justify-center space-y-4">
+          <!-- Folded-Corner File Type Vector Badges (.JPG / .PNG / .WEBP) -->
+          <div class="flex items-center justify-center gap-3 sm:gap-5">
+            <!-- .JPG Badge -->
+            <div class="w-12 h-14 sm:w-14 sm:h-16 rounded-lg bg-gradient-to-b from-sky-500 to-blue-700 p-1.5 flex flex-col justify-between shadow-md border border-sky-300/30 transform -rotate-3">
+              <div class="flex justify-end">
+                <span class="w-2.5 h-2.5 bg-sky-200/40 rounded-bl"></span>
+              </div>
+              <i class="fa-regular fa-image text-white/90 text-sm sm:text-base"></i>
+              <span class="font-mono font-extrabold text-[10px] sm:text-xs tracking-wider text-white bg-black/25 rounded px-1 py-0.5">.JPG</span>
+            </div>
+
+            <!-- .PNG Badge -->
+            <div class="w-12 h-14 sm:w-14 sm:h-16 rounded-lg bg-gradient-to-b from-amber-500 to-orange-600 p-1.5 flex flex-col justify-between shadow-md border border-amber-300/30 transform translate-y-[-3px]">
+              <div class="flex justify-end">
+                <span class="w-2.5 h-2.5 bg-amber-200/40 rounded-bl"></span>
+              </div>
+              <i class="fa-solid fa-layer-group text-white/90 text-sm sm:text-base"></i>
+              <span class="font-mono font-extrabold text-[10px] sm:text-xs tracking-wider text-white bg-black/25 rounded px-1 py-0.5">.PNG</span>
+            </div>
+
+            <!-- .WEBP Badge (Upgrade #2) -->
+            <div class="w-12 h-14 sm:w-14 sm:h-16 rounded-lg bg-gradient-to-b from-emerald-500 to-teal-700 p-1.5 flex flex-col justify-between shadow-md border border-emerald-300/30 transform rotate-3">
+              <div class="flex justify-end">
+                <span class="w-2.5 h-2.5 bg-emerald-200/40 rounded-bl"></span>
+              </div>
+              <i class="fa-solid fa-bolt text-white/90 text-sm sm:text-base"></i>
+              <span class="font-mono font-extrabold text-[10px] sm:text-xs tracking-wider text-white bg-black/25 rounded px-1 py-0.5">.WEBP</span>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <div class="text-sm sm:text-base font-bold recomp-label text-sky-300" data-i18n="dropTitle">
+              DRAG IMAGES HERE TO BEGIN
+            </div>
+            <p class="text-xs text-slate-400" data-i18n="dropSub">
+              Batch import supported
+            </p>
+          </div>
+
+          <!-- Primary Pick Button -->
+          <div class="flex flex-col sm:flex-row items-center gap-3 pt-1">
+            <label for="fileInput" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('fileInput').click()}"
+              class="cursor-pointer px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-bold text-xs sm:text-sm recomp-label shadow-lg shadow-sky-600/30 transition flex items-center gap-2">
+              <i class="fa-solid fa-folder-open"></i>
+              <span data-i18n="pickBtn">PICK IMAGES TO COMPRESS</span>
+            </label>
+            <input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple class="hidden" />
+
+            <span class="text-xs text-slate-400">
+              <span data-i18n="orPaste">or press</span>
+              <kbd class="mx-1 px-2 py-1 text-xs font-mono font-bold bg-sky-950 text-sky-200 border border-sky-400 rounded shadow-sm">CTRL + V</kbd>
+            </span>
+          </div>
+
+          <!-- Upgrade #7: Instant Sample Image Trigger Bar -->
+          <div class="w-full pt-3.5 mt-2 border-t border-slate-700/70 flex flex-wrap items-center justify-center gap-2 text-xs">
+            <span class="text-slate-400 font-medium" data-i18n="trySamplesLabel">Instant Demo Samples:</span>
+            <button onclick="addSampleSpecimens(['landscape'])"
+              class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-sky-300 border border-slate-600/80 font-medium transition flex items-center gap-1.5">
+              <i class="fa-solid fa-mountain-sun text-[11px]"></i>
+              <span data-i18n="sampleLandscape">The Solitary Traveler (JPG)</span>
+            </button>
+            <button onclick="addSampleSpecimens(['portrait'])"
+              class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-amber-300 border border-slate-600/80 font-medium transition flex items-center gap-1.5">
+              <i class="fa-solid fa-id-badge text-[11px]"></i>
+              <span data-i18n="samplePortrait">Portrait（Fine Detail）</span>
+            </button>
+            <button onclick="addSampleSpecimens(['landscape', 'portrait'], true)"
+              class="px-2.5 py-1 rounded-lg bg-sky-950/80 hover:bg-sky-900 text-white border border-sky-500/40 font-semibold transition flex items-center gap-1.5">
+              <i class="fa-solid fa-layer-group text-[11px] text-sky-400"></i>
+              <span data-i18n="sampleReset">Reset & Load Samples</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3. MAIN WORKSPACE: IMAGES SUMMARY & CARD LIST ==================== -->
+  <main id="workspaceSection" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-5">
+
+    <!-- ==================== GLOBAL "IMAGES SUMMARY" BAR (UPGRADE #1 & #6) ==================== -->
+    <section id="imagesSummaryBar" class="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+      <!-- Top Row: Recompressor Signature Summary Metrics + Download All (.ZIP) -->
+      <div class="p-4 sm:px-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-8 rounded-full bg-sky-600"></div>
+          <div>
+            <h2 class="text-lg font-extrabold recomp-label text-slate-500" data-i18n="summaryTitle">IMAGE SUMMARY</h2>
+          </div>
+        </div>
+
+        <!-- 4 Live Counters: IMAGES / ORIGINAL / COMPRESSED / REDUCTION -->
+        <div class="flex-1 min-w-0 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 bg-slate-50 rounded-xl px-4 py-2.5 border border-slate-200/70 tabular-nums">
+          <div>
+            <div class="text-[10px] font-bold recomp-label text-slate-400" data-i18n="lblImages">IMAGES</div>
+            <div id="sumCount" class="text-base sm:text-lg font-mono font-extrabold text-slate-800">0</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold recomp-label text-slate-400" data-i18n="lblOriginal">ORIGINAL</div>
+            <div id="sumOrigSize" class="text-base sm:text-lg font-mono font-bold text-slate-700">0 KB</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold recomp-label text-slate-400" data-i18n="lblCompressed">COMPRESSED</div>
+            <div id="sumCompSize" class="text-base sm:text-lg font-mono font-extrabold text-sky-600">0 KB</div>
+          </div>
+          <div>
+            <div class="text-[10px] font-bold recomp-label text-slate-400" data-i18n="lblReduction">REDUCTION</div>
+            <div id="sumReduction" class="text-base sm:text-lg font-mono font-extrabold text-emerald-600">0.0%</div>
+          </div>
+        </div>
+
+        <!-- Batch Actions: Download All (.ZIP) & Clear -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="downloadAllAsZip()" id="downloadAllZipBtn"
+            class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs recomp-label shadow-sm shadow-emerald-600/20 transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-zipper"></i>
+            <span data-i18n="downloadAllZip">DOWNLOAD ALL IMAGES</span>
+          </button>
+          <button onclick="clearAllImages()" title="Clear all images" data-i18n-title="clearImages"
+            class="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 text-xs font-semibold transition">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Global Target Size (KB) Batch Controller & Global Format Switch -->
+      <div class="px-4 sm:px-6 py-3 bg-slate-50/80 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-bold text-slate-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-bullseye text-rose-600"></i>
+            <span data-i18n="globalTargetLabel">Batch Target Strategy:</span>
+          </span>
+
+          <!-- Quick Global Presets -->
+          <button onclick="applyGlobalStrategy('knee', null)" id="globalBtnKnee"
+            class="global-preset-btn px-2.5 py-1 rounded-lg font-semibold border border-sky-600 bg-sky-50 text-sky-700 transition">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1"></i><span data-i18n="batchKnee">Auto Knee Optimal</span>
+          </button>
+          <button onclick="applyGlobalStrategy('target', 50)" id="globalBtn50"
+            class="global-preset-btn px-2.5 py-1 rounded-lg font-mono font-semibold border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition">
+            ≤ 50 KB
+          </button>
+          <button onclick="applyGlobalStrategy('target', 100)" id="globalBtn100"
+            class="global-preset-btn px-2.5 py-1 rounded-lg font-mono font-semibold border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition">
+            ≤ 100 KB
+          </button>
+          <button onclick="applyGlobalStrategy('target', 200)" id="globalBtn200"
+            class="global-preset-btn px-2.5 py-1 rounded-lg font-mono font-semibold border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition">
+            ≤ 200 KB
+          </button>
+          <button onclick="applyGlobalStrategy('target', 500)" id="globalBtn500"
+            class="global-preset-btn px-2.5 py-1 rounded-lg font-mono font-semibold border border-slate-200 bg-white text-slate-700 hover:border-slate-300 transition">
+            ≤ 500 KB
+          </button>
+
+          <!-- Custom Global Target KB Input -->
+          <div class="flex items-center gap-1 ml-1">
+            <div class="relative">
+              <input id="globalCustomKBInput" aria-label="Batch target size (KB)" type="number" min="10" max="10240" step="10" value="150"
+                class="w-24 h-7 pl-2.5 pr-7 rounded-lg bg-white border border-slate-300 font-mono text-xs font-bold text-slate-800 focus:outline-none focus:border-sky-600 tabular-nums" />
+              <span class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400">KB</span>
+            </div>
+            <button onclick="applyCustomGlobalKB()"
+              class="h-7 px-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold text-[11px] transition" data-i18n="applyAllBtn">
+              Apply to All
+            </button>
+          </div>
+        </div>
+
+        <!-- Global Format Conversion Helper -->
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-slate-500 font-medium" data-i18n="globalFormatLabel">Batch Format:</span>
+          <select id="globalFormatSelect" aria-label="Batch output format" onchange="applyGlobalFormat(this.value)"
+            class="h-7 px-2 rounded-lg bg-white border border-slate-300 text-xs font-semibold text-slate-700 focus:outline-none focus:border-sky-600">
+            <option value="original" data-i18n="formatOriginal">Keep Original Format</option>
+            <option value="auto" data-i18n="formatAuto">Smart Auto (PNG→WebP/JPG)</option>
+            <option value="image/jpeg" data-i18n="formatJpg">Convert All to JPG</option>
+            <option value="image/webp" data-i18n="formatWebp">Convert All to WebP</option>
+            <option value="image/png" data-i18n="formatPng">Convert All to PNG</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PER-IMAGE HORIZONTAL CARD LIST ==================== -->
+    <section id="imageCardsContainer" class="space-y-4">
+      <!-- Dynamically populated 3-column Recompressor cards -->
+    </section>
+
+    <!-- Empty State Placeholder (Hidden when images exist) -->
+    <div id="emptyWorkspaceBox" class="hidden bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
+      <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 mx-auto flex items-center justify-center text-xl">
+        <i class="fa-regular fa-images"></i>
+      </div>
+      <div class="text-base font-bold text-slate-700" data-i18n="emptyTitle">No images in the workspace</div>
+      <p class="text-xs text-slate-500 max-w-md mx-auto" data-i18n="emptyBody">
+        Drop JPG, PNG, or WebP files into the box above, or click one of the instant demo buttons to inspect the interactive RMSE vs. File Size curve.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- ==================== 4. HOW IT WORKS & ABOUT RECOMPRESSOR FAQ ==================== -->
+  <section id="howItWorksSection" class="bg-white border-t border-slate-200/90 py-12 px-4 sm:px-6 mt-8">
+    <div class="max-w-6xl mx-auto space-y-12">
+
+      <!-- 3-Step Visual Workflow (PICK -> PROCESS -> DOWNLOAD) -->
+      <div class="info-workflow">
+        <div class="info-heading">
+          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900" data-i18n="howItWorksHeading">How It Works</h3>
+        </div>
+
+        <div class="workflow-steps">
+          <!-- Step 1: PICK -->
+          <div class="workflow-step">
+            <div class="workflow-step-heading">
+              <i class="fa-solid fa-cloud-arrow-up text-sky-600" aria-hidden="true"></i>
+              <span data-i18n="stepPick">1. PICK</span>
+            </div>
+            <p class="workflow-step-description" data-i18n-html="pickBody">
+              Select the images you want to process with <strong>PIXEL PRESS</strong>.
+            </p>
+          </div>
+
+          <!-- Step 2: PROCESS -->
+          <div class="workflow-step">
+            <div class="workflow-step-heading">
+              <i class="fa-solid fa-chart-line text-emerald-600" aria-hidden="true"></i>
+              <span data-i18n="stepProcess">2. PROBE & COMPRESS</span>
+            </div>
+            <p class="workflow-step-description" data-i18n-html="processBody">
+              Each image is automatically compressed at six quality levels, with precise target-size compression also available.
+            </p>
+          </div>
+
+          <!-- Step 3: DOWNLOAD -->
+          <div class="workflow-step">
+            <div class="workflow-step-heading">
+              <i class="fa-solid fa-magnifying-glass-chart text-indigo-600" aria-hidden="true"></i>
+              <span data-i18n="stepInspect">3. PREVIEW & DOWNLOAD</span>
+            </div>
+            <p class="workflow-step-description" data-i18n-html="inspectBody">
+              Click a thumbnail to compare the original and compressed images in split view, then download the results you like. It's all free.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- About & Technical FAQ (2-Column Grid) -->
+      <div id="faqSection" class="info-faq">
+        <div class="info-heading">
+          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900" data-i18n="faqHeading">About Pixel Press</h3>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+              <span data-i18n="faqPrivacy">Are my images uploaded to a server?</span>
+            </h4>
+            <p data-i18n-html="privacyBody">
+              No. Pixel Press processes images in your browser and does not upload the images you select to a server.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-square-root-variable text-sky-600"></i>
+              <span data-i18n="faqMetrics">What are RMSE and MAX ERROR?</span>
+            </h4>
+            <p data-i18n-html="metricsBody">
+              These metrics measure the difference between the compressed image and the original: RMSE describes overall pixel error, while MAX ERROR is the largest difference in a single color channel. Lower values mean the sampled images are closer. To speed up calculation, images are reduced before comparison, so some details may be missed.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i>
+              <span data-i18n="faqTarget">Is this tool free?</span>
+            </h4>
+            <p data-i18n-html="targetBody">
+              Yes! Pixel Press is completely free to use.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-palette text-amber-600"></i>
+              <span data-i18n="faqFormat">What happens to transparency when converting PNG to JPG?</span>
+            </h4>
+            <p data-i18n-html="formatBody">
+              JPG does not support transparency. Transparent areas become white after conversion.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[#131A24] text-slate-400 text-xs py-6 px-4 sm:px-6 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-2">
+        <span class="font-bold text-white uppercase tracking-wider">PIXEL PRESS</span>
+        <span data-i18n="footerTagline">— Compress JPG, PNG & WebP to your target size</span>
+      </div>
+      <div class="text-slate-500" data-i18n="footerDetails">
+        Free image compression in your browser • No uploads
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== 5. FULL-SCREEN PIXEL LIGHTBOX INSPECTOR MODAL ==================== -->
+  <div id="lightboxModal" role="dialog" aria-modal="true" aria-label="Image inspector" class="fixed inset-0 z-50 hidden bg-[#0B0F17]/95 backdrop-blur-md flex flex-col select-none">
+
+    <!-- Lightbox Top Control Bar -->
+    <div class="min-h-14 py-2 px-3 sm:px-5 bg-[#131A24] border-b border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-200 shrink-0">
+
+      <!-- Left: Image Switcher & Filename -->
+      <div class="flex items-center gap-2">
+        <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
+          <button onclick="stepLightboxImage(-1)" title="Previous Image" data-i18n-title="previousImage" class="px-2 py-1 rounded hover:bg-slate-700 text-slate-300 transition">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <span id="lbImageCounter" class="px-2 font-mono text-[11px] text-slate-400">1 / 2</span>
+          <button onclick="stepLightboxImage(1)" title="Next Image" data-i18n-title="nextImage" class="px-2 py-1 rounded hover:bg-slate-700 text-slate-300 transition">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <span id="lbFileName" class="font-bold text-white truncate max-w-[160px] sm:max-w-[240px]">sample.jpg</span>
+      </div>
+
+      <!-- Center-Left: 4-Mode View Switcher (Orig / Diff / Comp / Split) -->
+      <div class="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-700/80">
+        <button id="lbModeOrig" onclick="setLightboxViewMode('orig')"
+          class="px-3 py-1 rounded-lg font-bold text-xs transition text-slate-400 hover:text-white" data-i18n="viewOriginal">
+          Original (Orig)
+        </button>
+        <button id="lbModeDiff" onclick="setLightboxViewMode('diff')"
+          class="px-3 py-1 rounded-lg font-bold text-xs transition text-slate-400 hover:text-white flex items-center gap-1">
+          <i class="fa-solid fa-fire-flame-curved text-amber-400"></i>
+          <span data-i18n="viewDiff">Diff (Error ×8)</span>
+        </button>
+        <button id="lbModeComp" onclick="setLightboxViewMode('comp')"
+          class="px-3 py-1 rounded-lg font-bold text-xs transition text-slate-400 hover:text-white" data-i18n="viewCompressed">
+          Compressed (Comp)
+        </button>
+        <button id="lbModeSplit" onclick="setLightboxViewMode('split')"
+          class="px-3 py-1 rounded-lg font-bold text-xs transition bg-sky-600 text-white shadow-sm flex items-center gap-1">
+          <i class="fa-solid fa-arrows-left-right"></i>
+          <span data-i18n="viewSplit">Split Slider</span>
+        </button>
+      </div>
+
+      <!-- Center-Right: Curve Node Stepper Inside Modal -->
+      <div class="hidden xl:flex items-center gap-1.5 bg-slate-800/90 px-2.5 py-1 rounded-xl border border-slate-700 tabular-nums">
+        <button onclick="stepLightboxQuality(-1)" title="Smaller File Size" data-i18n-title="smallerFile" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold transition">
+          <i class="fa-solid fa-minus text-[10px]"></i> <span data-i18n="smallerKb">Smaller KB</span>
+        </button>
+        <span id="lbPointMetrics" class="px-2 font-mono text-[11px] text-sky-300 font-semibold">
+          184.2 KB • RMSE 1.92
+        </span>
+        <button onclick="stepLightboxQuality(1)" title="Higher Visual Quality" data-i18n-title="higherQuality" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold transition">
+          <span data-i18n="higherQ">Higher Q</span> <i class="fa-solid fa-plus text-[10px]"></i>
+        </button>
+      </div>
+
+      <!-- Right: Zoom Controls, Download & Close -->
+      <div class="flex items-center gap-2">
+        <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
+          <button onclick="zoomLightboxBy(0.8)" title="Zoom Out" data-i18n-title="zoomOut" class="px-2 py-1 rounded hover:bg-slate-700 text-slate-300">
+            <i class="fa-solid fa-magnifying-glass-minus"></i>
+          </button>
+          <button onclick="setLightboxZoom('fit')" id="lbZoomFitBtn" class="px-2 py-1 rounded text-[11px] font-bold bg-slate-700 text-white" data-i18n="fit">
+            Fit
+          </button>
+          <button onclick="setLightboxZoom(1)" id="lbZoom1to1Btn" class="px-2 py-1 rounded text-[11px] font-mono font-bold text-slate-300 hover:text-white">
+            1:1 (100%)
+          </button>
+          <button onclick="zoomLightboxBy(1.25)" title="Zoom In" data-i18n-title="zoomIn" class="px-2 py-1 rounded hover:bg-slate-700 text-slate-300">
+            <i class="fa-solid fa-magnifying-glass-plus"></i>
+          </button>
+        </div>
+
+        <button onclick="downloadLightboxActive()"
+          class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs recomp-label transition flex items-center gap-1.5">
+          <i class="fa-solid fa-download"></i>
+          <span class="hidden sm:inline" data-i18n="download">DOWNLOAD</span>
+        </button>
+
+        <button onclick="closeLightbox()" title="Close Inspector (Esc)" data-i18n-title="closeInspector"
+          class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Lightbox Interactive Viewport -->
+    <div id="lightboxViewport" class="relative flex-1 bg-checkerboard-dark overflow-hidden flex items-center justify-center cursor-grab active:cursor-grabbing">
+
+      <!-- Floating Top-Left / Top-Right Telemetry Overlays -->
+      <div id="lbLeftBadge" class="absolute top-4 left-4 z-30 pointer-events-none px-3.5 py-2 rounded-xl bg-slate-900/90 backdrop-blur border border-slate-700 text-xs text-slate-200 shadow-lg space-y-0.5 tabular-nums">
+        <div class="font-bold text-slate-400 uppercase text-[10px] tracking-wider" id="lbLeftBadgeTitle" data-i18n="originalSource">ORIGINAL SOURCE</div>
+        <div id="lbLeftBadgeStats" class="font-mono font-bold text-white">742.0 KB • 1600×1060</div>
+      </div>
+
+      <div id="lbRightBadge" class="absolute top-4 right-4 z-30 pointer-events-none px-3.5 py-2 rounded-xl bg-slate-900/90 backdrop-blur border border-sky-500/50 text-xs text-slate-200 shadow-lg space-y-0.5 text-right tabular-nums">
+        <div class="font-bold text-sky-400 uppercase text-[10px] tracking-wider" id="lbRightBadgeTitle" data-i18n="compressedOutput">COMPRESSED OUTPUT</div>
+        <div id="lbRightBadgeStats" class="font-mono font-bold text-white">188.4 KB (-74.6%) • RMSE 1.85</div>
+      </div>
+
+      <!-- Zoom & Pan Stage Container -->
+      <div id="lbStageContainer" class="relative inline-block origin-center transition-transform duration-75 ease-out shadow-2xl">
+        <!-- Base Image (Compressed in Split/Comp mode, Original in Orig mode) -->
+        <img id="lbBaseImg" alt="Inspector Base" data-i18n-alt="inspectorImage" class="block max-w-none select-none pointer-events-none" draggable="false" />
+
+        <!-- Pixel Diff Canvas (Shown in 'diff' mode) -->
+        <canvas id="lbDiffCanvas" class="hidden block max-w-none select-none pointer-events-none"></canvas>
+
+        <!-- Clipped Original Overlay (Shown in 'split' mode) -->
+        <div id="lbSplitClipOverlay" class="absolute inset-0 overflow-hidden select-none pointer-events-none" style="clip-path: inset(0 50% 0 0);">
+          <img id="lbOverlayOrigImg" alt="Inspector Original Overlay" data-i18n-alt="inspectorOverlay" class="block max-w-none select-none pointer-events-none" draggable="false" />
+        </div>
+      </div>
+
+      <!-- Draggable Split Curtain Handle (Shown in 'split' mode) -->
+      <div id="lbSplitDivider" class="absolute top-0 bottom-0 w-0.5 bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.9)] z-20 cursor-ew-resize" style="left: 50%;">
+        <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-9 h-9 rounded-full bg-slate-900 border-2 border-sky-400 text-sky-400 shadow-xl flex items-center justify-center hover:scale-110 transition-transform">
+          <i class="fa-solid fa-arrows-left-right text-xs"></i>
+        </div>
+      </div>
+
+      <!-- Bottom Help Bar Inside Lightbox -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none px-4 py-1.5 rounded-full bg-slate-900/90 border border-slate-700 text-[11px] text-slate-400 flex items-center gap-3 shadow-lg">
+        <span data-i18n-html="helpZoom"><strong class="text-slate-200">Scroll</strong> to zoom (up to 400%)</span>
+        <span>•</span>
+        <span data-i18n-html="helpPan"><strong class="text-slate-200">Drag</strong> to pan</span>
+        <span>•</span>
+        <span data-i18n-html="helpDiff"><strong class="text-sky-400">Diff Mode</strong> amplifies RGB pixel error ×8</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="processingStatus" role="status" hidden data-i18n="processing">Processing images…</div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toastNotification" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-200 px-4 py-2.5 rounded-xl bg-slate-900 text-white border border-slate-700 shadow-xl flex items-center gap-2.5 text-xs font-medium">
+    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMessage" data-i18n="ready">Ready</span>
+  </div>
+
+  <!-- ==================== CORE JAVASCRIPT ENGINE ==================== -->
+  <script src="js/i18n.js"></script>
+  <script src="js/zip.js"></script>
+  <script src="js/specimens.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
